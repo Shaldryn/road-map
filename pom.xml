@@ -11,6 +11,7 @@
     <modules>
         <module>start_java_level_2</module>
         <module>jdbc</module>
+        <module>http-servlets-starter</module>
     </modules>
 
     <properties>
