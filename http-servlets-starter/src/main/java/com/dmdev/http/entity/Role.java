@@ -1,0 +1,16 @@
+package com.dmdev.http.entity;
+
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
+
+public enum Role {
+    USER,
+    ADMIN;
+
+    public static Optional<Role> find(String role) {
+        return Arrays.stream(values())
+                .filter(it -> Objects.equals(it.name(), role))
+                .findFirst();
+    }
+}

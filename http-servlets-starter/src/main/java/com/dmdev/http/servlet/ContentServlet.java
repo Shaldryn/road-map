@@ -1,5 +1,6 @@
 package com.dmdev.http.servlet;
 
+import com.dmdev.http.dto.FlightDto;
 import com.dmdev.http.service.FlightService;
 import com.dmdev.http.util.JspHelper;
 import jakarta.servlet.ServletException;
@@ -9,17 +10,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
-@WebServlet("/flights")
-public class FlightServlet extends HttpServlet {
+@WebServlet("/content")
+public class ContentServlet extends HttpServlet {
 
     private final FlightService flightService = FlightService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("flights", flightService.findAll());
+        var flightDtos = flightService.findAll();
+        req.setAttribute("flights", flightDtos);
+        req.getSession().setAttribute("flightsMap", flightDtos.stream()
+                .collect(Collectors.toMap(FlightDto::getId, FlightDto::getDescription)));
 
-        req.getRequestDispatcher(JspHelper.getPath("flights"))
-                        .forward(req, resp);
+
+        req.getRequestDispatcher(JspHelper.getPath("content"))
+                .forward(req, resp);
     }
 }
