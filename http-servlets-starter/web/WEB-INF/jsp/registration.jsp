@@ -12,12 +12,18 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/registration" method="post">
+<%--<img src="${pageContext.request.contextPath}/images/users/42.jpg" alt="User image">--%>
+<img src="${pageContext.request.contextPath}/images/users/lion-king-unhappy-timon-512x512.png" alt="User image">
+
+<form action="/registration" method="post" enctype="multipart/form-data">
     <label for="name">Name:
         <input type="text" name="name" id="name">
     </label><br>
     <label for="birthday">Birthday:
-        <input type="date" name="birthday" id="birthday">
+        <input type="date" name="birthday" id="birthday" required>
+    </label><br>
+    <label for="imageId">Image:
+        <input type="file" name="image" id="imageId" required>
     </label><br>
     <label for="emailId">Email:
         <input type="text" name="email" id="emailId">
